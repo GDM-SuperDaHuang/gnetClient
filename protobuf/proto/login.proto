@@ -1,0 +1,19 @@
+syntax = "proto3";
+package login;
+option go_package = "gameServer/protobuf/pbGo";
+import "user.proto";
+
+// 协议: 13 登录
+message LoginReq {
+  string token = 1; // 由验证服务器 auth 返回 access_token
+  uint64 uuid = 2; // 由验证服务器 auth 返回 uuid
+  uint32 server_id = 3; // 当前选择的区服 id
+  uint32 version = 4; // 版本，用于测试
+  int32 lang = 5; // 玩家当前语言 language_type.xlsx - id
+}
+
+message LoginResp {
+  user.user role = 1; // 角色详情，没有会自动创建
+  uint64 uuid = 2;
+  string name = 3;
+}
